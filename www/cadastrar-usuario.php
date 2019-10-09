@@ -4,7 +4,7 @@ include('navbar.php');
 
 
 if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
-	header("Location: http://localhost:81/home.php");
+	header("Location: http://localhost:81/index.php");
 }
 
 ?>

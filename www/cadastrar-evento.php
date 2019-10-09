@@ -5,7 +5,7 @@ if (!isset($_SESSION['usuario'])){
 	header("Location: http://localhost:81/login.php");
 }
 if ($_SESSION['tipo-cadastro'] == 'Visitante'){
-	header("Location: http://localhost:81/home.php");
+	header("Location: http://localhost:81/index.php");
 }
 
 ?>
