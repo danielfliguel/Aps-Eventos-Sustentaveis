@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<title>Aprovar Eventos</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
-	
-</head>
+<?php include_once("navbar.php"); ?>
 <body>
 	
 	<?php 
-	session_start();
+	
 	$mysqli = new mysqli('mysql', 'root', '123456', 'eventos_milgrau') or die (mysqli_error($mysqli));
 	$results = $mysqli->query("SELECT * FROM tbeventos") or die (mysqli_error($mysqli));	
 	include_once("navbar.php"); 
 	require_once 'process.php';
 	
 	?>
-	
-	<h1>CONSULTAR EVENTOS</h1>
+	<h1>EDITAR EVENTOS</h1>
 	<div class="container">
 		<table class="table">
 			<thead>

@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<title>Login</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
-</head>
+<?php include_once("navbar.php"); ?>
 <body>
-	<?php session_start(); ?>
+	
 	<?php if (isset($_SESSION['usuario'])){
 		header("Location: http://localhost:81/cadastrar-evento.php"); 
 	}  
 	?>	
-	<?php include_once("navbar.php"); ?>
 	<h1>Bem vindo à M!LG4@U Eventos</h1>
 	<div class="container">
 		<div class="row">
@@ -57,9 +49,6 @@
 	</div>
 	<div class="center">
 		<a style="text-align: center;"href="cadastro.php">Não possui uma conta? Cadastre-se!</a>
-	</div>
-	
-	
-	
+	</div>	
 </body>
 </html>

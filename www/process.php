@@ -151,7 +151,7 @@ if (isset($_POST['login'])){
 //APROVAÇÃO DE EVENTO
 if (isset($_GET['aprovar'])){
 	$idEvento = $_GET['aprovar'];
-	$mysqli->query("UPDATE tbeventos SET aprovado = 1 WHERE id = '$idEvento'");
+	$mysqli->query("UPDATE tbeventos SET aprovado = 1 WHERE idevento = '$idEvento'");
 	header("Location: http://localhost:81/aprovar-eventos.php?aprovado=EVENTO APROVADO COM SUCESSO");
 
 }

@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<title>Aprovar Eventos</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
-	
-</head>
+<?php include_once("navbar.php"); ?>
 <body>
 	
-	<?php 
-	session_start();
+	<?php 	
 	$mysqli = new mysqli('mysql', 'root', '123456', 'eventos_milgrau') or die (mysqli_error($mysqli));
 	$results = $mysqli->query("SELECT * FROM tbeventos WHERE aprovado = 0") or die (mysqli_error($mysqli));	
 	include_once("navbar.php"); 
@@ -26,9 +17,8 @@
 	<?php
 		}
 	?>
-	<h1>Aprovação de Eventos</h1>
+	<h1>APROVAÇÃO DE EVENTOS</h1>
 	<div class="container">
-		<h1>EVENTOS AGUARDANDO APROVAÇÃO</h1>
 		<table class="table">
 			<thead>
 				<td>ID</td>
@@ -49,7 +39,7 @@
 					<td><?php echo $row['local'];?></td>
 					<td><?php echo $row['data'];?></td>
 					<td><?php echo $row['hora'];?></td>
-					<td><a class="btn btn-success" href="process.php?aprovar=<?php echo $row['id'] ?>">APROVAR</a></td>
+					<td><a class="btn btn-success" href="process.php?aprovar=<?php echo $row['idevento'] ?>">APROVAR</a></td>
 				</tr>
 			<?php }?>
 		</table>		
