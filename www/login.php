@@ -56,7 +56,7 @@ if (isset($_SESSION['usuario'])){
 		</div>				
 	</div>
 	<div class="center">
-		<a style="text-align: center;"href="cadastro.php">Não possui uma conta? Cadastre-se!</a>
+		<a style="text-align: center;"href="cadastrar-usuario.php">Não possui uma conta? Cadastre-se!</a>
 	</div>	
 </body>
 </html>
