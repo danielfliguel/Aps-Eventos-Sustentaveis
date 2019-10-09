@@ -1,4 +1,12 @@
-<?php include_once("navbar.php"); ?>
+<?php
+include('head.php');
+include('navbar.php');
+
+if (!isset($_SESSION['usuario'])){
+	header("Location: http://localhost:81/login.php");
+}
+
+?>
 <body>
 	
 	<?php 

@@ -1,4 +1,13 @@
-<?php include_once("navbar.php"); ?>
+<?php
+include('head.php');
+include('navbar.php');
+if (!isset($_SESSION['usuario'])){
+	header("Location: http://localhost:81/login.php");
+}
+if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
+	header("Location: http://localhost:81/home.php");
+}
+?>
 <body>
 	
 	<?php 
@@ -16,14 +25,18 @@
 				<td>ID</td>
 				<td>NOME DO EVENTO</td>
 				<td>EDITAR</td>
-				<td>EXCLUIR</td>
+				<?php if ($_SESSION['tipo-cadastro']=='Administrador'):?>
+					<td>EXCLUIR</td>
+				<?php endif; ?>
 			</thead>
 			<?php foreach ($results as $row) {?>
 				<tr>
 					<td><?php echo $row['idevento'];?></td>
 					<td><?php echo $row['nome_evento'];?></td>
 					<td><a class="btn btn-primary" href="cadastrar-evento.php?editarEvento=<?php echo $row['idevento'] ?>">EDITAR</a></td>
-					<td><a class="btn btn-danger" href="process.php?excluirEvento=<?php echo $row['idevento'] ?>">EXCLUIR</a></td>
+					<?php if ($_SESSION['tipo-cadastro']=='Administrador'):?>
+						<td><a class="btn btn-danger" href="process.php?excluirEvento=<?php echo $row['idevento'] ?>">EXCLUIR</a></td>
+					<?php endif; ?>
 				</tr>
 			<?php }?>
 		</table>		

@@ -1,4 +1,16 @@
-<?php include_once("navbar.php"); ?>
+<?php
+include('head.php');
+include('navbar.php');
+
+if (!isset($_SESSION['usuario'])){
+	header("Location: http://localhost:81/login.php");
+}
+if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
+	header("Location: http://localhost:81/home.php");
+}
+
+?>
+
 <body>
 	
 	<?php
