@@ -1,4 +1,4 @@
-<?php 
+F<?php 
 
 session_start();
 $mysqli = new mysqli('mysql', 'root', '123456', 'eventos_milgrau') or die (mysqli_error($mysqli));
@@ -134,27 +134,34 @@ if (isset($_GET['excluirUsuario'])){
 }
 
 //LOGIN 
+//SE FOR REALIZADA UMA TENTATIVA DE LOGIN
 if (isset($_POST['login'])){
+	//A variável $usuario armazena o que for inserido no campo usuário
 	$usuario = $_POST['usuario'];
+	//A variável $senha armazena o que for inserido no campo senha
 	$senha = $_POST['senha'];
 
 	//(password_verify($senha, $password_hash)
 
 	//$hashSenha = password_hash($senha, PASSWORD_DEFAULT);
 
-
+		//A variável $result armazena o resultado da query que busca no banco uma linha na tabela tbusuarios em que o nome_usuario seja igual à variavel $usuario e senha seja igual a $senha
 		$result = $mysqli->query("SELECT * FROM tbusuarios where nome_usuario = '$usuario' and senha = '$senha'") or die ($mysqli->error);
+	//Looping para desmembrar o array obtido na variácel $result
 	foreach ($result as $value) {
 		# code...*/
 	}
+	//Se o elemento do array nome_usuario for igual à variável $usuario e o elemento senha for igual à variável $senha, inicia-se a sessão.
 	if ($value['nome_usuario'] == $usuario &&  $value['senha'] == $senha){
 		
+		//A sessão armazena o nome do usuário, o tipo de cadastro, o id do usuario e o redireciona para a página principal
 		$_SESSION['usuario'] = $usuario;
 		$_SESSION['tipo-cadastro'] = $value['tipo_cadastro'];
 		$_SESSION ['idusuario'] = $value['idusuario'];
-		header("Location: http://localhost:81/cadastrar-evento.php"); 	
+		header("Location: http://localhost:81/index.php"); 	
 	}
 	else{
+		//Caso o login não seja bem sucedido, redireciona o usuário para a tela de login e solicita que o mesmo digite os dados novamente
 		header("Location: http://localhost:81/login.php?invalid=Informe o login e senha corretos."); 
 	}
 }
