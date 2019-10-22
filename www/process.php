@@ -3,6 +3,7 @@
 session_start();
 $mysqli = new mysqli('mysql', 'root', '123456', 'eventos_milgrau') or die (mysqli_error($mysqli));
 
+
 //CADASTRO DE EVENTO
 if (isset($_POST['cadastrar-evento'])){
 	$nomeEvento = $_POST['nome-evento'];
@@ -65,6 +66,9 @@ if (isset($_POST['cadastrar-usuario'])){
 	$email = $_POST['email'];
 	$telefone = $_POST['telefone'];
 	$senha = $_POST['senha'];
+
+	$hashSenha = password_hash($senha, PASSWORD_DEFAULT);
+
 	$tipoCadastro = $_POST['tipo-cadastro'];
 	$rua = $_POST['rua'];
 	$numeroRua = $_POST['numero-rua'];
@@ -74,7 +78,7 @@ if (isset($_POST['cadastrar-usuario'])){
 
 
 
-	$mysqli->query("INSERT INTO tbusuarios (nome_usuario,cpf,sexo,data_nascimento,tipo_cadastro,senha) VALUES ('$nomeUsuario','$cpf','$sexo',date('$dataNascimento'),'$tipoCadastro','$senha')") or die ($mysqli->error);
+	$mysqli->query("INSERT INTO tbusuarios (nome_usuario,cpf,sexo,data_nascimento,tipo_cadastro,senha) VALUES ('$nomeUsuario','$cpf','$sexo',date('$dataNascimento'),'$tipoCadastro','$hashSenha')") or die ($mysqli->error);
 	
 
 	$mysqli->query("INSERT INTO tbcontato (idusuario,email,telefone,rua,numero,complemento,cidade,estado) VALUES ('$id','$email','$telefone','$rua','$numeroRua','$complemento','$cidade','$estado')") or die ($mysqli->error);
@@ -95,6 +99,9 @@ if (isset($_POST['editar-usuario'])){
 	$email = $_POST['email'];	
 	$telefone = $_POST['telefone'];
 	$senha = $_POST['senha'];
+
+	$hashSenha = password_hash($senha, PASSWORD_DEFAULT);
+
 	$tipoCadastro = $_POST['tipo-cadastro'];
 	$rua = $_POST['rua'];
 	$numeroRua = $_POST['numero-rua'];
@@ -105,7 +112,7 @@ if (isset($_POST['editar-usuario'])){
 	
 	
 
-	$mysqli->query("UPDATE tbusuarios SET nome_usuario = '$nomeUsuario' ,cpf = '$cpf' ,sexo = '$sexo' ,data_nascimento = date('$dataNascimento') ,tipo_cadastro = '$tipoCadastro' ,senha = '$senha'  WHERE idusuario = '$idUsuario' ") or die ($mysqli->error);
+	$mysqli->query("UPDATE tbusuarios SET nome_usuario = '$nomeUsuario' ,cpf = '$cpf' ,sexo = '$sexo' ,data_nascimento = date('$dataNascimento') ,tipo_cadastro = '$tipoCadastro' ,senha = '$hashSenha'  WHERE idusuario = '$idUsuario' ") or die ($mysqli->error);
 	
 
 	$mysqli->query("UPDATE tbcontato SET email = '$email' ,telefone = '$telefone',rua = '$rua',numero = '$numeroRua',complemento = '$complemento',cidade = '$cidade',estado = '$estado' WHERE  idusuario = '$idUsuario'") or die ($mysqli->error);
@@ -131,12 +138,16 @@ if (isset($_POST['login'])){
 	$usuario = $_POST['usuario'];
 	$senha = $_POST['senha'];
 
-	
-	$result = $mysqli->query("SELECT * FROM tbusuarios where nome_usuario = '$usuario' and senha = '$senha'") or die ($mysqli->error);
+	//(password_verify($senha, $password_hash)
+
+	//$hashSenha = password_hash($senha, PASSWORD_DEFAULT);
+
+
+		$result = $mysqli->query("SELECT * FROM tbusuarios where nome_usuario = '$usuario' and senha = '$senha'") or die ($mysqli->error);
 	foreach ($result as $value) {
-		# code...
+		# code...*/
 	}
-	if ($value['nome_usuario'] == $usuario && $value['senha'] == $senha){
+	if ($value['nome_usuario'] == $usuario &&  $value['senha'] == $senha){
 		
 		$_SESSION['usuario'] = $usuario;
 		$_SESSION['tipo-cadastro'] = $value['tipo_cadastro'];
