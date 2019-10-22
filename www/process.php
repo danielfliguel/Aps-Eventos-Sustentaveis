@@ -140,20 +140,18 @@ if (isset($_POST['login'])){
 	//A variável $senha armazena o que for inserido no campo senha
 	$senha = $_POST['senha'];
 	
-
-	//(password_verify($senha, $password_hash)
-
-	//$hashSenha = password_hash($senha, PASSWORD_DEFAULT);
-
-		//A variável $result armazena o resultado da query que busca no banco uma linha na tabela tbusuarios em que o nome_usuario seja igual à variavel $usuario e senha seja igual a $senha
-		$result = $mysqli->query("SELECT * FROM tbusuarios where nome_usuario = '$usuario' ") or die ($mysqli->error);
+	//A variável $result armazena o resultado da query que busca no banco uma linha na tabela tbusuarios em que o nome_usuario seja igual à variavel $usuario
+	$result = $mysqli->query("SELECT * FROM tbusuarios where nome_usuario = '$usuario' ") or die ($mysqli->error);
 	//Looping para desmembrar o array obtido na variácel $result
-	$success = password_verify($senha, $value['senha']);
 	
+
 	foreach ($result as $value) {
 		# code...*/
 	}
-	//Se o elemento do array nome_usuario for igual à variável $usuario e o elemento senha for igual à variável $senha, inicia-se a sessão.
+	//Variável que compara a senha digitada com a senha criptografada no banco
+	$success = password_verify($senha, $value['senha']);
+	
+	//Se a comaração retornar true, inicia a sessão.
 	if ($success){
 		
 		//A sessão armazena o nome do usuário, o tipo de cadastro, o id do usuario e o redireciona para a página principal
