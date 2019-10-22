@@ -65,10 +65,9 @@ if (isset($_POST['cadastrar-usuario'])){
 	$dataNascimento = $_POST['data-nascimento'];
 	$email = $_POST['email'];
 	$telefone = $_POST['telefone'];
-	$senha = $_POST['senha'];
+	$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 
-	$hashSenha = password_hash($senha, PASSWORD_DEFAULT);
-
+	
 	$tipoCadastro = $_POST['tipo-cadastro'];
 	$rua = $_POST['rua'];
 	$numeroRua = $_POST['numero-rua'];
@@ -78,7 +77,7 @@ if (isset($_POST['cadastrar-usuario'])){
 
 
 
-	$mysqli->query("INSERT INTO tbusuarios (nome_usuario,cpf,sexo,data_nascimento,tipo_cadastro,senha) VALUES ('$nomeUsuario','$cpf','$sexo',date('$dataNascimento'),'$tipoCadastro','$hashSenha')") or die ($mysqli->error);
+	$mysqli->query("INSERT INTO tbusuarios (nome_usuario,cpf,sexo,data_nascimento,tipo_cadastro,senha) VALUES ('$nomeUsuario','$cpf','$sexo',date('$dataNascimento'),'$tipoCadastro','$senha')") or die ($mysqli->error);
 	
 
 	$mysqli->query("INSERT INTO tbcontato (idusuario,email,telefone,rua,numero,complemento,cidade,estado) VALUES ('$id','$email','$telefone','$rua','$numeroRua','$complemento','$cidade','$estado')") or die ($mysqli->error);
@@ -140,19 +139,22 @@ if (isset($_POST['login'])){
 	$usuario = $_POST['usuario'];
 	//A variável $senha armazena o que for inserido no campo senha
 	$senha = $_POST['senha'];
+	
 
 	//(password_verify($senha, $password_hash)
 
 	//$hashSenha = password_hash($senha, PASSWORD_DEFAULT);
 
 		//A variável $result armazena o resultado da query que busca no banco uma linha na tabela tbusuarios em que o nome_usuario seja igual à variavel $usuario e senha seja igual a $senha
-		$result = $mysqli->query("SELECT * FROM tbusuarios where nome_usuario = '$usuario' and senha = '$senha'") or die ($mysqli->error);
+		$result = $mysqli->query("SELECT * FROM tbusuarios where nome_usuario = '$usuario' ") or die ($mysqli->error);
 	//Looping para desmembrar o array obtido na variácel $result
+	$success = password_verify($senha, $value['senha']);
+	
 	foreach ($result as $value) {
 		# code...*/
 	}
 	//Se o elemento do array nome_usuario for igual à variável $usuario e o elemento senha for igual à variável $senha, inicia-se a sessão.
-	if ($value['nome_usuario'] == $usuario &&  $value['senha'] == $senha){
+	if ($success){
 		
 		//A sessão armazena o nome do usuário, o tipo de cadastro, o id do usuario e o redireciona para a página principal
 		$_SESSION['usuario'] = $usuario;
