@@ -142,7 +142,7 @@ if (isset($_POST['login'])){
 	
 	//A variável $result armazena o resultado da query que busca no banco uma linha na tabela tbusuarios em que o nome_usuario seja igual à variavel $usuario
 	$result = $mysqli->query("SELECT * FROM tbusuarios where nome_usuario = '$usuario' ") or die ($mysqli->error);
-	//Looping para desmembrar o array obtido na variácel $result
+	//Looping para desmembrar o array obtido na variável $result
 	
 
 	foreach ($result as $value) {
