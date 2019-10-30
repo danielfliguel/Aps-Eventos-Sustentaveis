@@ -1,7 +1,7 @@
 F<?php 
 
 session_start();
-$mysqli = new mysqli('mysql', 'root', '123456', 'eventos_milgrau') or die (mysqli_error($mysqli));
+$mysqli = new mysqli('mysql-milgrau.database.windows.net', 'milgrau', 'Mil45678', 'eventos_milgrau') or die (mysqli_error($mysqli));
 
 
 //CADASTRO DE EVENTO
