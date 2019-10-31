@@ -1,7 +1,24 @@
-F<?php 
+<?php 
 
 session_start();
-$mysqli = new mysqli('mysql-milgrau.database.windows.net', 'milgrau', 'Mil45678', 'eventos_milgrau') or die (mysqli_error($mysqli));
+// $conn = new mysqli('mysql', 'root', '123456', 'eventos_milgrau') or die (mysqli_error($conn));
+
+$serverName = "mysql-milgrau.database.windows.net";
+$connectionOptions = array("Database"=>"eventos_milgrau",
+	"Uid"=>"milgrau",
+	"PWD"=>"Mil45678"
+);
+$conn = sqlsrv_connect($serverName,$connectionOptions);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+echo "Connected successfully";
+$result = sqlsrv_query($conn,"SELECT * FROM dbo.tbusuarios");
+sqlsrv_fetch_array($result);
+var_dump($result);
+
+
+die();
 
 
 //CADASTRO DE EVENTO
@@ -13,7 +30,7 @@ if (isset($_POST['cadastrar-evento'])){
 	$dataEvento = $_POST['data-evento'];
 	$horaEvento = $_POST['hora-evento'];
 
-	$mysqli->query("INSERT INTO tbeventos (nome_evento,empresa,capacidade,local,data,hora,aprovado) VALUES ('$nomeEvento','$empresaOrg','$capacidade','$local',date('$dataEvento'),'$horaEvento',0)") or die ($mysqli->error);
+	sqlsrv_query($conn,"INSERT INTO tbeventos (nome_evento,empresa,capacidade,local,data,hora,aprovado) VALUES ('$nomeEvento','$empresaOrg','$capacidade','$local',date('$dataEvento'),'$horaEvento',0)");
 	
 	header("Location: http://localhost:81/cadastrar-evento.php?cadastrado=SOLICITAÇÃO ENVIADA COM SUCESSO"); 
 	
@@ -29,7 +46,7 @@ if (isset($_POST['editar-evento'])){
 	$horaEvento = $_POST['hora-evento'];
 	$statusEvento = $_POST['status-evento'];
 
-	$mysqli->query("UPDATE tbeventos SET nome_evento = '$nomeEvento', empresa = '$empresaOrg', capacidade = '$capacidade', local = '$local', data = date('$dataEvento'), hora = '$horaEvento', aprovado = '$statusEvento' WHERE idevento = '$idEvento'") or die ($mysqli->error);	
+	sqlsrv_query($conn,"UPDATE tbeventos SET nome_evento = '$nomeEvento', empresa = '$empresaOrg', capacidade = '$capacidade', local = '$local', data = date('$dataEvento'), hora = '$horaEvento', aprovado = '$statusEvento' WHERE idevento = '$idEvento'");	
 	
 	header("Location: http://localhost:81/consultar-eventos-adm.php"); 
 	
@@ -40,13 +57,13 @@ if (isset($_GET['excluirEvento'])){
 	$idEvento = $_GET['excluirEvento'];	
 	
 
-	$mysqli->query("DELETE FROM tbeventos WHERE idevento = '$idEvento' ") or die ($mysqli->error);			
+	sqlsrv_query($conn,"DELETE FROM tbeventos WHERE idevento = '$idEvento' ");			
 	
 	header("Location: http://localhost:81/consultar-eventos-adm.php"); 
 	
 }
 //CADASTRO DE USUÁRIO
-$result = $mysqli->query("SELECT * from tbusuarios ORDER BY idusuario DESC LIMIT 1");
+$result = sqlsrv_query($conn,"SELECT * from tbusuarios ORDER BY idusuario DESC LIMIT 1");
 	foreach ($result as $value) {
 
 	}
@@ -77,12 +94,12 @@ if (isset($_POST['cadastrar-usuario'])){
 
 
 
-	$mysqli->query("INSERT INTO tbusuarios (nome_usuario,cpf,sexo,data_nascimento,tipo_cadastro,senha) VALUES ('$nomeUsuario','$cpf','$sexo',date('$dataNascimento'),'$tipoCadastro','$senha')") or die ($mysqli->error);
+	sqlsrv_query($conn,"INSERT INTO tbusuarios (nome_usuario,cpf,sexo,data_nascimento,tipo_cadastro,senha) VALUES ('$nomeUsuario','$cpf','$sexo',date('$dataNascimento'),'$tipoCadastro','$senha')");
 	
 
-	$mysqli->query("INSERT INTO tbcontato (idusuario,email,telefone,rua,numero,complemento,cidade,estado) VALUES ('$id','$email','$telefone','$rua','$numeroRua','$complemento','$cidade','$estado')") or die ($mysqli->error);
+	sqlsrv_query($conn,"INSERT INTO tbcontato (idusuario,email,telefone,rua,numero,complemento,cidade,estado) VALUES ('$id','$email','$telefone','$rua','$numeroRua','$complemento','$cidade','$estado')");
 	?>
-	<script type='text/javascript'>alert('Solicitação enviada com sucesso');</script>
+	
 	<?php header("Location: http://localhost:81/login.php"); 
 	exit();
 }
@@ -111,10 +128,10 @@ if (isset($_POST['editar-usuario'])){
 	
 	
 
-	$mysqli->query("UPDATE tbusuarios SET nome_usuario = '$nomeUsuario' ,cpf = '$cpf' ,sexo = '$sexo' ,data_nascimento = date('$dataNascimento') ,tipo_cadastro = '$tipoCadastro' ,senha = '$hashSenha'  WHERE idusuario = '$idUsuario' ") or die ($mysqli->error);
+	sqlsrv_query($conn,"UPDATE tbusuarios SET nome_usuario = '$nomeUsuario' ,cpf = '$cpf' ,sexo = '$sexo' ,data_nascimento = date('$dataNascimento') ,tipo_cadastro = '$tipoCadastro' ,senha = '$hashSenha'  WHERE idusuario = '$idUsuario' ");
 	
 
-	$mysqli->query("UPDATE tbcontato SET email = '$email' ,telefone = '$telefone',rua = '$rua',numero = '$numeroRua',complemento = '$complemento',cidade = '$cidade',estado = '$estado' WHERE  idusuario = '$idUsuario'") or die ($mysqli->error);
+	sqlsrv_query($conn,"UPDATE tbcontato SET email = '$email' ,telefone = '$telefone',rua = '$rua',numero = '$numeroRua',complemento = '$complemento',cidade = '$cidade',estado = '$estado' WHERE  idusuario = '$idUsuario'");
 	
 	header("Location: http://localhost:81/consultar-usuarios.php"); 
 	
@@ -125,8 +142,8 @@ if (isset($_GET['excluirUsuario'])){
 	$idUsuario = $_GET['excluirUsuario'];	
 	
 
-	$mysqli->query("DELETE FROM tbusuarios WHERE idusuario = '$idUsuario' ") or die ($mysqli->error);	
-	$mysqli->query("DELETE FROM tbcontato WHERE idusuario = '$idUsuario' ") or die ($mysqli->error);	
+	sqlsrv_query($conn,"DELETE FROM tbusuarios WHERE idusuario = '$idUsuario' ");	
+	sqlsrv_query($conn,"DELETE FROM tbcontato WHERE idusuario = '$idUsuario' ");	
 	
 	header("Location: http://localhost:81/consultar-usuarios.php"); 
 	
@@ -140,8 +157,8 @@ if (isset($_POST['login'])){
 	//A variável $senha armazena o que for inserido no campo senha
 	$senha = $_POST['senha'];
 	
-	//A variável $result armazena o resultado da query que busca no banco uma linha na tabela tbusuarios em que o nome_usuario seja igual à variavel $usuario
-	$result = $mysqli->query("SELECT * FROM tbusuarios where nome_usuario = '$usuario' ") or die ($mysqli->error);
+	//A variável $result armazena o resultado da sqlsrv_query que busca no banco uma linha na tabela tbusuarios em que o nome_usuario seja igual à variavel $usuario
+	$result = sqlsrv_query($conn,"SELECT * FROM tbusuarios where nome_usuario = '$usuario' ");
 	//Looping para desmembrar o array obtido na variável $result
 	
 
@@ -169,7 +186,7 @@ if (isset($_POST['login'])){
 //APROVAÇÃO DE EVENTO
 if (isset($_GET['aprovar'])){
 	$idEvento = $_GET['aprovar'];
-	$mysqli->query("UPDATE tbeventos SET aprovado = 1 WHERE idevento = '$idEvento'");
+	sqlsrv_query($conn,"UPDATE tbeventos SET aprovado = 1 WHERE idevento = '$idEvento'");
 	header("Location: http://localhost:81/aprovar-eventos.php?aprovado=EVENTO APROVADO COM SUCESSO");
 
 }
@@ -178,7 +195,7 @@ if (isset($_GET['aprovar'])){
 if (isset($_GET['participar'])){
 	$idEvento = $_GET['participar'];
 	$idParticipante = $_SESSION['idusuario'];
-	$mysqli->query("INSERT INTO tbeventos_participantes (idparticipante,idevento) VALUES ('$idParticipante','$idEvento')") or die (mysqli_error($mysqli));
+	sqlsrv_query($conn,"INSERT INTO tbeventos_participantes (idparticipante,idevento) VALUES ('$idParticipante','$idEvento')");
 	header("Location: http://localhost:81/consultar-eventos.php?participacaoConfirmada=PARTICIPAÇÃO CONFIRMADA");
 
 }
