@@ -45,7 +45,7 @@ if (isset($_SESSION['usuario'])){
 					</div>
 					<div class="form-group">
 						<label class="login-label">Senha</label>
-						<input type="password" name="senha" class="form-control login-form" placeholder="Senha">	
+						<input type="password" name="senha" class="form-control login-form" placeholder="Senha" required>	
 					</div>
 					<div class="form-group text-center">
 						<button class="btn btn-primary" type="submit" name="login">Login</button>

@@ -9,16 +9,16 @@ $connectionOptions = array("Database"=>"eventos_milgrau",
 	"PWD"=>"Mil45678"
 );
 $conn = sqlsrv_connect($serverName,$connectionOptions);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
-$result = sqlsrv_query($conn,"SELECT * FROM dbo.tbusuarios");
-sqlsrv_fetch_array($result);
-var_dump($result);
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// } 
+// echo "Connected successfully";
+// $result = sqlsrv_query($conn,"SELECT * FROM dbo.tbusuarios");
+// sqlsrv_fetch_array($result);
+// var_dump($result);
 
 
-die();
+// die();
 
 
 //CADASTRO DE EVENTO
@@ -149,6 +149,7 @@ if (isset($_GET['excluirUsuario'])){
 	
 }
 
+
 //LOGIN 
 //SE FOR REALIZADA UMA TENTATIVA DE LOGIN
 if (isset($_POST['login'])){
@@ -156,20 +157,22 @@ if (isset($_POST['login'])){
 	$usuario = $_POST['usuario'];
 	//A variável $senha armazena o que for inserido no campo senha
 	$senha = $_POST['senha'];
+	//variável que armazena a busca
+	$queryLogin = "SELECT * FROM dbo.tbusuarios WHERE nome_usuario = ?";	
+	//Efetiva a busca no banco
+	$loginParams = array($usuario);
+	$getLoginResults = sqlsrv_query($conn,$queryLogin,$loginParams);
+	//Trata os dados recebidos do banco
+	$rowLogin = sqlsrv_fetch_array($getLoginResults, SQLSRV_FETCH_ASSOC);
 	
-	//A variável $result armazena o resultado da sqlsrv_query que busca no banco uma linha na tabela tbusuarios em que o nome_usuario seja igual à variavel $usuario
-	$result = sqlsrv_query($conn,"SELECT * FROM tbusuarios where nome_usuario = '$usuario' ");
-	//Looping para desmembrar o array obtido na variável $result
-	
-
-	foreach ($result as $value) {
-		# code...*/
-	}
+	// foreach ($result as $value) {
+	// 	# code...*/
+	// }
 	//Variável que compara a senha digitada com a senha criptografada no banco
 	$success = password_verify($senha, $value['senha']);
 	
 	//Se a comaração retornar true, inicia a sessão.
-	if ($success){
+	if ($senha == $rowLogin['senha']){
 		
 		//A sessão armazena o nome do usuário, o tipo de cadastro, o id do usuario e o redireciona para a página principal
 		$_SESSION['usuario'] = $usuario;
@@ -182,6 +185,7 @@ if (isset($_POST['login'])){
 		header("Location: http://localhost:81/login.php?invalid=Informe o login e senha corretos."); 
 	}
 }
+
 
 //APROVAÇÃO DE EVENTO
 if (isset($_GET['aprovar'])){
