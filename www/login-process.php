@@ -8,12 +8,14 @@ if (isset($_POST['login'])){
 	//A variável $senha armazena o que for inserido no campo senha
 	$senha = $_POST['senha'];
 	//variável que armazena a busca
-	$queryLogin = "SELECT * FROM dbo.tbusuarios WHERE nome_usuario = ?";	
+	$queryLogin = "SELECT * FROM dbo.tbusuarios WHERE usuario = ?";	
 	//Efetiva a busca no banco
 	$loginParams = array($usuario);
 	$getLoginResults = sqlsrv_query($conn,$queryLogin,$loginParams);
 	//Trata os dados recebidos do banco
 	$rowLogin = sqlsrv_fetch_array($getLoginResults, SQLSRV_FETCH_ASSOC);
+
+	$querySenha = "SELECT * FROM dbo.tbusuarios WHERE email = ?";
 	
 	// foreach ($result as $value) {
 	// 	# code...*/
@@ -26,8 +28,8 @@ if (isset($_POST['login'])){
 		
 		//A sessão armazena o nome do usuário, o tipo de cadastro, o id do usuario e o redireciona para a página principal
 		$_SESSION['usuario'] = $usuario;
-		$_SESSION['tipo-cadastro'] = $value['tipo_cadastro'];
-		$_SESSION ['idusuario'] = $value['idusuario'];
+		$_SESSION['tipo-cadastro'] = $rowLogin['tipo_cadastro'];
+		$_SESSION ['idusuario'] = $rowLogin['idusuario'];
 		header("Location: http://localhost:81/index.php"); 	
 	}
 	else{

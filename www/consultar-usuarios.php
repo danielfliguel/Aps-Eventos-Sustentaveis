@@ -28,8 +28,8 @@ $queryUsuariosResults = sqlsrv_query($conn,$queryUsuarios);
 					<td><?php echo $rowUsuario['idusuario'];?></td>
 					<td><?php echo $rowUsuario['nome_usuario'];?></td>
 					<?php if ($_SESSION['tipo-cadastro'] == "Administrador"):?>
-						<td><a class="btn btn-primary" href="cadastrar-usuario.php?editarUsuario=<?php echo $rowUsuarios['idusuario'] ?>">EDITAR</a></td>
-						<td><a class="btn btn-danger" href="process.php?excluirUsuario=<?php echo $rowUsuarios['idusuario'] ?>">EXCLUIR</a></td>
+						<td><a class="btn btn-primary" href="editar-usuario.php?editarUsuario=<?php echo $rowUsuario['idusuario'] ?>">EDITAR</a></td>
+						<td><a class="btn btn-danger" href="process/excluir-usuario-process.php?excluirUsuario=<?php echo $rowUsuario['idusuario'] ?>">EXCLUIR</a></td>
 					<?php endif; ?>
 				</tr>
 			<?php }?>

@@ -2,15 +2,12 @@
 include('head.php');
 
 if (isset($_SESSION['usuario'])){
-	header("Location: http://localhost:81/home.php");
+	header("Location: http://localhost:81/index.php");
 }
 
 ?>
 <body>
-	
-	<?php if (isset($_SESSION['usuario'])){
-		header("Location: http://localhost:81/cadastrar-evento.php"); 
-	}  
+	 
 	?>	
 	<h1>Bem vindo à M!LG4@U Eventos</h1>
 	<div class="container">

@@ -27,7 +27,7 @@ if (isset($_POST['cadastrar-usuario'])){
 	$telefone = $_POST['telefone'];
 	$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 	var_dump($dataNascimento);
-	die();
+	
 
 	
 	$tipoCadastro = $_POST['tipo-cadastro'];

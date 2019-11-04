@@ -1,22 +1,21 @@
 <?php
 include('head.php');
-include('navbar.php');
+include('dbconnection.php');
 
-if (!isset($_SESSION['usuario'])){
-	header("Location: http://localhost:81/login.php");
-}
+// if (!isset($_SESSION['usuario'])){
+// 	header("Location: http://localhost:81/login.php");
+// }
 
 ?>
 <body>
 	
 	<?php 
 	
-	$mysqli = new mysqli('mysql', 'root', '123456', 'eventos_milgrau') or die (mysqli_error($mysqli));
-	$results = $mysqli->query("SELECT * FROM tbeventos WHERE aprovado = 1") or die (mysqli_error($mysqli));	
+	$queryEventosDisponiveis = "SELECT * FROM dbo.tbeventos WHERE aprovado = 1";
+	$getEventosDisponiveis = sqlsrv_query($conn,$queryEventosDisponiveis);
+
 	$idusuario = $_SESSION['idusuario'];
-	$estaParticipando = $mysqli->query("SELECT * FROM tbeventos_participantes WHERE idparticipante != '$idusuario'") or die (mysqli_error($mysqli));	
-	include_once("navbar.php"); 
-	require_once 'process.php';
+	
 	
 	?>
 	<?php
@@ -43,29 +42,17 @@ if (!isset($_SESSION['usuario'])){
 			</div>
 		<table class="table">
 			<thead>
-				
 				<td>EMPRESA</td>
 				<td>EVENTO</td>
-				<td>CAPACIDADE</td>
 				<td>LOCAL</td>
-				<td>DATA</td>
-				<td>HORÁRIO</td>
-				<td>PARTICIPAR</td>
+				<td>DETALHES</td>
 			</thead>
-			<?php foreach ($results as $row) {?>
+			<?php while($rowEventosDisponiveis = sqlsrv_fetch_array($getEventosDisponiveis, SQLSRV_FETCH_ASSOC)){?>
 				<tr>
-					
-					<td><?php echo $row['empresa'];?></td>
-					<td><?php echo $row['nome_evento'];?></td>
-					<td><?php echo $row['capacidade'];?></td>
-					<td><?php echo $row['local'];?></td>
-					<td><?php echo $row['data'];?></td>
-					<td><?php echo $row['hora'];?></td>
-					<?php if ($estaParticipando):?>
-						<td><a class="btn btn-success" href="process.php?participar=<?php echo $row['id'] ?>">PARTICIPAR</a></td>
-					<?php else:?>
-						<td><a class="btn btn-danger" href="process.php?cancelarParticipacao=<?php echo $row['id'] ?>">CANCELAR PARTICIPAÇÃO</a></td>
-					<?php endif; ?>
+					<td><?php echo $rowEventosDisponiveis['empresa'];?></td>
+					<td><?php echo $rowEventosDisponiveis['nome_evento'];?></td>
+					<td><?php echo $rowEventosDisponiveis['local'];?></td>
+					<td><a class="btn btn-info" href="detalhe-evento.php?id=<?php echo $rowEventosDisponiveis['idevento'] ?>">DETALHES</a></td>
 				</tr>
 			<?php }?>
 		</table>		

@@ -1,23 +1,25 @@
 <?php
 include('head.php');
-include('navbar.php');
-if (!isset($_SESSION['usuario'])){
-	header("Location: http://localhost:81/login.php");
-}
-if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
-	header("Location: http://localhost:81/index.php");
-}
+include 'dbconnection.php';
+// if (!isset($_SESSION['usuario'])){
+// 	header("Location: http://localhost:81/login.php");
+// }
+// if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
+// 	header("Location: http://localhost:81/index.php");
+// }
+	$queryEventosNaoAprovados = "SELECT * FROM tbeventos WHERE aprovado = 0";
+	$eventosNaoAprovados = sqlsrv_query($conn,$queryEventosNaoAprovados);
+	
+	
+	
+
+	
 ?>
 
 <body>
 	
-	<?php 	
-	$mysqli = new mysqli('mysql', 'root', '123456', 'eventos_milgrau') or die (mysqli_error($mysqli));
-	$results = $mysqli->query("SELECT * FROM tbeventos WHERE aprovado = 0") or die (mysqli_error($mysqli));	
-	include_once("navbar.php"); 
-	require_once 'process.php';
+
 	
-	?>
 	<?php
 		if (@$_GET['aprovado']==true){
 	?>
@@ -34,22 +36,14 @@ if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == '
 				<td>ID</td>
 				<td>EMPRESA</td>
 				<td>EVENTO</td>
-				<td>CAPACIDADE</td>
-				<td>LOCAL</td>
-				<td>DATA</td>
-				<td>HORÁRIO</td>
 				<td>APROVAR</td>
 			</thead>
-			<?php foreach ($results as $row) {?>
+			<?php while($rowEventosNaoAprovados = sqlsrv_fetch_array($eventosNaoAprovados, SQLSRV_FETCH_ASSOC)){?>
 				<tr>
-					<td><?php echo $row['idevento'];?></td>
-					<td><?php echo $row['empresa'];?></td>
-					<td><?php echo $row['nome_evento'];?></td>
-					<td><?php echo $row['capacidade'];?></td>
-					<td><?php echo $row['local'];?></td>
-					<td><?php echo $row['data'];?></td>
-					<td><?php echo $row['hora'];?></td>
-					<td><a class="btn btn-success" href="process.php?aprovar=<?php echo $row['idevento'] ?>">APROVAR</a></td>
+					<td><?php echo $rowEventosNaoAprovados['idevento'];?></td>
+					<td><?php echo $rowEventosNaoAprovados['empresa'];?></td>
+					<td><?php echo $rowEventosNaoAprovados['nome_evento'];?></td>
+					<td><a class="btn btn-success" href="aprovar-evento.php?aprovar=<?php echo $rowEventosNaoAprovados['idevento'] ?>">APROVAR</a></td>
 				</tr>
 			<?php }?>
 		</table>		

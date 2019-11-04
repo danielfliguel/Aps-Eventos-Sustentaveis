@@ -13,7 +13,7 @@ include 'dbconnection.php';
 <?php
 
 
-$idUsuario = (int)$_GET['idusuario'];
+$idUsuario = (int)$_GET['editarUsuario'];
 
 $queryUsuario = "SELECT * from dbo.tbusuarios WHERE idusuario = ?";
 $queryUsuarioParam = array($idUsuario);

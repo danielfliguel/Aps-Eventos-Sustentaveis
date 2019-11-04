@@ -30,7 +30,7 @@ include 'dbconnection.php';
 				<tr>
 					<td><?php echo $rowEvento['idevento'];?></td>
 					<td><?php echo $rowEvento['nome_evento'];?></td>
-					<td><a class="btn btn-primary" href="cadastrar-evento.php?editarEvento=<?php echo $rowEvento['idevento'] ?>">EDITAR</a></td>
+					<td><a class="btn btn-primary" href="editar-evento.php?editarEvento=<?php echo $rowEvento['idevento'] ?>">EDITAR</a></td>
 					<?php if ($_SESSION['tipo-cadastro']=='Administrador'){?>
 						<td><a class="btn btn-danger" href="process.php?excluirEvento=<?php echo $rowEvento['idevento'] ?>">EXCLUIR</a></td>
 					<?php } ?>
