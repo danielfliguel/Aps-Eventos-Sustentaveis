@@ -1,6 +1,5 @@
 <?php 
 include('head.php');
-include('navbar.php');
 
 if (isset($_SESSION['usuario'])){
 	header("Location: http://localhost:81/home.php");
@@ -38,7 +37,7 @@ if (isset($_SESSION['usuario'])){
 		<div class="row">
 			<div class="col-3"></div>
 			<div class="col-6">
-				<form action="process.php" method="post">
+				<form action="login-process.php" method="post">
 					<div class="form-group">
 						<label class="login-label">Login</label>
 						<input type="text" class="form-control login-form" name="usuario" placeholder="Usuario">
