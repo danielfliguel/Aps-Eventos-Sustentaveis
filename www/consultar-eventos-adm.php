@@ -15,6 +15,28 @@ include 'dbconnection.php';
 	$queryEventosResults = sqlsrv_query($conn,$queryEventos);
 	 	
 	?>
+	<div class="col-12">
+				<?php
+				if (@$_GET['editar']==true){
+				?>
+				<div class="alert-light text-danger text-center py-3">
+					<?php echo $_GET['editar'];?>
+				</div>
+				<?php
+				}
+				?>
+				<div class="col-12">
+				<?php
+				if (@$_GET['excluir']==true){
+				?>
+				<div class="alert-light text-danger text-center py-3">
+					<?php echo $_GET['excluir'];?>
+				</div>
+				<?php
+				}
+				?>
+			</div>
+			</div>
 	<h1>EDITAR EVENTOS</h1>
 	<div class="container">
 		<table class="table">
@@ -32,7 +54,7 @@ include 'dbconnection.php';
 					<td><?php echo $rowEvento['nome_evento'];?></td>
 					<td><a class="btn btn-primary" href="editar-evento.php?editarEvento=<?php echo $rowEvento['idevento'] ?>">EDITAR</a></td>
 					<?php if ($_SESSION['tipo-cadastro']=='Administrador'){?>
-						<td><a class="btn btn-danger" href="process.php?excluirEvento=<?php echo $rowEvento['idevento'] ?>">EXCLUIR</a></td>
+						<td><a class="btn btn-danger" href="excluir-evento-process.php?excluirEvento=<?php echo $rowEvento['idevento'] ?>">EXCLUIR</a></td>
 					<?php } ?>
 				</tr>
 			<?php }?>

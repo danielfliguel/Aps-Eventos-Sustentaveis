@@ -9,28 +9,28 @@ $lastId = sqlsrv_fetch_array($getLastId, SQLSRV_FETCH_ASSOC);
 var_dump($lastId);
 
 
-if ($lastId){
+if ($lastId != null){
 	$id = $lastId['']+1;
 }
 else{
 	$id = 1;
 }	
 
-if (isset($_POST['cadastrar-usuario'])){
 
+
+	//DADOS DA PARA TABELA tbusuarios
 	$nomeUsuario = $_POST['nome-usuario'];
+	$usuario = $_POST['usuario'];
 	$cpf = $_POST['cpf'];
 	$sexo = $_POST['sexo'];
 	$dataNascimento = $_POST['data-nascimento'];
 	$dataNascimento = date('Y-m-d', $dataNascimento);
+	$tipoCadastro = $_POST['tipo-cadastro'];	
+	$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+	
+		
 	$email = $_POST['email'];
 	$telefone = $_POST['telefone'];
-	$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-	var_dump($dataNascimento);
-	
-
-	
-	$tipoCadastro = $_POST['tipo-cadastro'];
 	$rua = $_POST['rua'];
 	$numeroRua = $_POST['numero-rua'];
 	$complemento = $_POST['complemento'];
@@ -38,8 +38,8 @@ if (isset($_POST['cadastrar-usuario'])){
 	$estado = $_POST['estado'];
 
 	//INSERÇÃO DOS DADOS NA TABELA tbusuarios
-	$queryInsertUserData = "INSERT INTO dbo.tbusuarios (nome_usuario,cpf,sexo,data_nascimento,tipo_cadastro,senha) VALUES (?,?,?,?,?,?);";
-	$insertUserParams = array($nomeUsuario,(int)$cpf,$sexo,$dataNascimento,$tipoCadastro,$senha);
+	$queryInsertUserData = "INSERT INTO dbo.tbusuarios (nome_usuario,usuario,cpf,sexo,data_nascimento,tipo_cadastro,senha) VALUES (?,?,?,?,?,?,?);";
+	$insertUserParams = array($nomeUsuario,$usuario,$cpf,$sexo,$dataNascimento,$tipoCadastro,$senha);
 	
 	$insertUserData = sqlsrv_query($conn,$queryInsertUserData,$insertUserParams) or die(print_r(sqlsrv_errors()));
 	
@@ -48,7 +48,7 @@ if (isset($_POST['cadastrar-usuario'])){
 	//INSERÇÃO DE DADOS NA TABELA TBCONTATO
 	$queryInsertUserContact = "INSERT INTO dbo.tbcontato (idusuario,email,telefone,rua,numero,complemento,cidade,estado) VALUES (?,?,?,?,?,?,?,?)";
 	$insertUserContactParams = array($id,$email,$telefone,$rua,$numeroRua,$complemento,$cidade,$estado);
-	$insertUserContact = sqlsrv_query($conn,$queryInsertUserContact,$insertUserContactParams);
+	$insertUserContact = sqlsrv_query($conn,$queryInsertUserContact,$insertUserContactParams) or die(print_r(sqlsrv_errors()));;
 	sqlsrv_free_stmt($insertUserContact);
 	
 	if ($insertUserData && $insertUserContact) {
@@ -59,5 +59,5 @@ if (isset($_POST['cadastrar-usuario'])){
 		header("Location: http://localhost:81/login.php?error=Não foi possível criar o usuário.");
 		exit();
 	}
-}
+
 ?>

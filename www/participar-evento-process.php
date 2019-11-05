@@ -5,8 +5,8 @@
 	var_dump($idEvento);
 	$idParticipante = $_SESSION['idusuario'];
 	var_dump($idParticipante);
-	$queryParticiparEvento = "INSERT INTO dbo.tbeventos_participantes (idusuario,idevento) VALUES (?,?)";
-	$paramsParticiparEvento = array($idParticipante,$idEvento);
+	$queryParticiparEvento = "UPDATE dbo.tbusuarios SET evento_inscrito = 1 WHERE idusuario = ?";
+	$paramsParticiparEvento = array($idParticipante);
 	$participarEvento = sqlsrv_query($conn,$queryParticiparEvento,$paramsParticiparEvento);
 	sqlsrv_free_stmt($participarEvento);
 	

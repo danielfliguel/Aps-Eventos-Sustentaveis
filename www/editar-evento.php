@@ -16,12 +16,10 @@ include('dbconnection.php');
 	
 	
 	$idEvento = (int) $_GET['editarEvento'];
-	var_dump($idEvento);
 	$queryEvento = "SELECT * from dbo.tbeventos WHERE idevento = ?";
 	$paramEvento = array($idEvento);
 	$getEvento = sqlsrv_query($conn,$queryEvento,$paramEvento);
 	$rowEvento = sqlsrv_fetch_array($getEvento, SQLSRV_FETCH_ASSOC);
-	var_dump($rowEvento);
 	
 	$convertDateQuery =	"SELECT convert(varchar(10),data,121) FROM dbo.tbeventos WHERE idevento = ?";
 	$convertDateQueryParam = array($idEvento);

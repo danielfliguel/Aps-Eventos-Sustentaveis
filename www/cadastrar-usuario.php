@@ -50,12 +50,16 @@ if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == '
 					<label class="register-label">Senha</label>
 					<input type="password" class="form-control" placeholder="Password" name="senha" required>
 				</div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-2">
 					<label class="register-label">Tipo de Cadastro</label>
 					<select class="form-control" name="tipo-cadastro">
 						<option>Empresa</option>				
 						<option>Visitante</option>	  					
 					</select>
+				</div>
+				<div class="form-group col-md-2">
+					<label class="register-label">Usuário</label>
+					<input type="text" class="form-control" placeholder="Nome de usuário" name="usuario" required>
 				</div>
 			</div>
 			<div class="form-row mb-3">

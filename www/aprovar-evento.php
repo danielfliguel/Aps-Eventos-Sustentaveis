@@ -16,7 +16,6 @@ include('dbconnection.php');
 	
 	
 	$idEvento = (int) $_GET['aprovar'];
-	var_dump($idEvento);
 	$queryEvento = "SELECT * from dbo.tbeventos WHERE idevento = ?";
 	$paramEvento = array($idEvento);
 	$getEvento = sqlsrv_query($conn,$queryEvento,$paramEvento);
@@ -35,7 +34,7 @@ include('dbconnection.php');
 
 	
 	?>
-	<h1>EDITAR EVENTO</h1>
+	<h1>APROVAR EVENTO</h1>
 	
 	<div class="container">
 		<form action="aprovar-evento-process.php?aprovar=<?php echo $idEvento?>" method="post">
@@ -79,7 +78,7 @@ include('dbconnection.php');
 				</div>				
 			</div>
 			<div class="center">
-				<button type="submit" class="btn btn-primary" name="editar-evento">ATUALIZAR</button>					
+				<button type="submit" class="btn btn-primary" name="editar-evento">APROVAR</button>					
 				
 			</div>			
 		</form>	

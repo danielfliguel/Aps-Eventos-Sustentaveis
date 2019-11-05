@@ -34,7 +34,7 @@ include('dbconnection.php');
 
 	
 	?>
-	<h1>EDITAR EVENTO</h1>
+	<h1>DETALHES DO EVENTO</h1>
 	
 	<div class="container">
 		<form action="participar-evento-process.php?participar=<?php echo $idEvento?>" method="post">
