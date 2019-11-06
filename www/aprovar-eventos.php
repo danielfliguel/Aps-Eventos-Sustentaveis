@@ -1,24 +1,17 @@
 <?php
 include('head.php');
-include 'dbconnection.php';
-// if (!isset($_SESSION['usuario'])){
-// 	header("Location: http://localhost:81/login.php");
-// }
-// if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
-// 	header("Location: http://localhost:81/index.php");
-// }
+include 'process/dbconnection.php';
+if (!isset($_SESSION['usuario'])){
+	header("Location: http://localhost:81/login.php");
+}
+if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
+	header("Location: http://localhost:81/index.php");
+}
 	$queryEventosNaoAprovados = "SELECT * FROM tbeventos WHERE aprovado = 0";
-	$eventosNaoAprovados = sqlsrv_query($conn,$queryEventosNaoAprovados);
-	
-	
-	
-
-	
+	$eventosNaoAprovados = sqlsrv_query($conn,$queryEventosNaoAprovados);	
 ?>
 
 <body>
-	
-
 	
 	<?php
 		if (@$_GET['aprovado']==true){

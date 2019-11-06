@@ -1,12 +1,12 @@
 <?php
 include 'head.php';
-include 'dbconnection.php';
-// if (!isset($_SESSION['usuario'])){
-// 	header("Location: http://localhost:81/login.php");
-// }
-// if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
-// 	header("Location: http://localhost:81/index.php");
-// }
+include 'process/dbconnection.php';
+if (!isset($_SESSION['usuario'])){
+	header("Location: http://localhost:81/login.php");
+}
+if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
+	header("Location: http://localhost:81/index.php");
+}
 ?>
 <body>
 	
@@ -54,7 +54,7 @@ include 'dbconnection.php';
 					<td><?php echo $rowEvento['nome_evento'];?></td>
 					<td><a class="btn btn-primary" href="editar-evento.php?editarEvento=<?php echo $rowEvento['idevento'] ?>">EDITAR</a></td>
 					<?php if ($_SESSION['tipo-cadastro']=='Administrador'){?>
-						<td><a class="btn btn-danger" href="excluir-evento-process.php?excluirEvento=<?php echo $rowEvento['idevento'] ?>">EXCLUIR</a></td>
+						<td><a class="btn btn-danger" href="/process/excluir-evento-process.php?excluirEvento=<?php echo $rowEvento['idevento'] ?>">EXCLUIR</a></td>
 					<?php } ?>
 				</tr>
 			<?php }?>

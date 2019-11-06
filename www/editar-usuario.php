@@ -1,11 +1,14 @@
 <?php
 include('head.php');
-include 'dbconnection.php';
+include 'process/dbconnection.php';
 
 
-// if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
-// 	header("Location: http://localhost:81/index.php");
-// }
+if (!isset($_SESSION['usuario'])){
+	header("Location: http://localhost:81/login.php");
+}
+if ($_SESSION['tipo-cadastro'] != 'Administrador'){
+	header("Location: http://localhost:81/index.php");
+}
 
 ?>
 <body>
@@ -35,7 +38,7 @@ $rowConvertedDate = sqlsrv_fetch_array($getConvertedDate, SQLSRV_FETCH_ASSOC);
 ?>
 <h1>EDITAR USUÁRIO</h1>
 <div class="container">
-<form action="editar-usuario-process.php" method="post">
+<form action="process/editar-usuario-process.php" method="post">
 <div class="form-row mb-3">
 
 <div class="form-group col-md-1">

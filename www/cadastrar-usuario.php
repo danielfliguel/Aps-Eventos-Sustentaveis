@@ -13,7 +13,7 @@ if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == '
 	<h1>FORMULÁRIO DE CADASTRO</h1>
 	
 	<div class="container">
-		<form action="cadastrar-usuario-process.php" method="post">
+		<form action="process/cadastrar-usuario-process.php" method="post">
 			<div class="form-row mb-3">
 				
 				<div class="form-group col-md-6">

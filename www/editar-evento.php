@@ -1,13 +1,13 @@
 
 <?php
 include('head.php');
-include('dbconnection.php');
-// if (!isset($_SESSION['usuario'])){
-// 	header("Location: http://localhost:81/login.php");
-// }
-// if ($_SESSION['tipo-cadastro'] == 'Visitante'){
-// 	header("Location: http://localhost:81/index.php");
-// }
+include('process/dbconnection.php');
+if (!isset($_SESSION['usuario'])){
+	header("Location: http://localhost:81/login.php");
+}
+if ($_SESSION['tipo-cadastro'] == 'Visitante' || $_SESSION['tipo-cadastro'] == 'Empresa'){
+	header("Location: http://localhost:81/index.php");
+}
 
 ?>
 <body>
@@ -36,7 +36,7 @@ include('dbconnection.php');
 	<h1>EDITAR EVENTO</h1>
 	
 	<div class="container">
-		<form action="editar-evento-process.php" method="post">
+		<form action="process/editar-evento-process.php" method="post">
 			<div class="form-row mb-3">
 					<div class="form-group col-md-1">
 						<label class="register-label">ID</label>

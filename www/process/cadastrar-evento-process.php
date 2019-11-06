@@ -6,7 +6,6 @@ include 'dbconnection.php';
 	$capacidade = $_POST['capacidade'];
 	$local = $_POST['local'];
 	$dataEvento = $_POST['data-evento'];
-	$dataEvento = date('Y-m-d', $dataEvento);
 	$horaEvento = $_POST['hora-evento'];
 
 	$queryEvento = "INSERT INTO dbo.tbeventos (nome_evento,empresa,capacidade,local,data,hora,aprovado) VALUES (?,?,?,?,?,?,0)";

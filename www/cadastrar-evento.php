@@ -1,12 +1,12 @@
 <?php
 include('head.php');
 
-// if (!isset($_SESSION['usuario'])){
-// 	header("Location: http://localhost:81/login.php");
-// }
-// if ($_SESSION['tipo-cadastro'] == 'Visitante'){
-// 	header("Location: http://localhost:81/index.php");
-// }
+if (!isset($_SESSION['usuario'])){
+	header("Location: http://localhost:81/login.php");
+}
+if ($_SESSION['tipo-cadastro'] == 'Visitante'){
+	header("Location: http://localhost:81/index.php");
+}
 
 ?>
 <body>	
@@ -21,7 +21,7 @@ include('head.php');
 		}
 	?>
 	<div class="container">
-		<form action="cadastrar-evento-process.php" method="post">
+		<form action="process/cadastrar-evento-process.php" method="post">
 			<div class="form-row mb-3">
 				
 					<div class="form-group col-md-12">

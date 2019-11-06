@@ -8,7 +8,7 @@ if (isset($_SESSION['usuario'])){
 ?>
 <body>
 	 
-	?>	
+		
 	<h1>Bem vindo à M!LG4@U Eventos</h1>
 	<div class="container">
 		<div class="row">
@@ -34,7 +34,7 @@ if (isset($_SESSION['usuario'])){
 		<div class="row">
 			<div class="col-3"></div>
 			<div class="col-6">
-				<form action="login-process.php" method="post">
+				<form action="process/login-process.php" method="post">
 					<div class="form-group">
 						<label class="login-label">Login</label>
 						<input type="text" class="form-control login-form" name="usuario" placeholder="Usuario">

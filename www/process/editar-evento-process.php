@@ -7,7 +7,6 @@ include 'dbconnection.php';
 	$capacidade = (int)$_POST['capacidade'];
 	$local = $_POST['local'];
 	$dataEvento = $_POST['data-evento'];
-	$dataEvento = date('Y-m-d', $dataEvento);
 	$horaEvento = $_POST['hora-evento'];
 	$statusEvento = (int)$_POST['status-evento'];
 
