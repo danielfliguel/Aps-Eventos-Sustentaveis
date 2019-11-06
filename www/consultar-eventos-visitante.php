@@ -54,7 +54,7 @@ if (!isset($_SESSION['usuario'])){
 	<?php if ($rowVerificaParticipacao['evento_inscrito']==1): ?>
 		<h1> VOCÊ JÁ ESTÁ INSCRITO EM UM EVENTO.</h1>
 		<h2 style="color: white; text-align: center;margin-top: 20px;">DESEJA CANCELAR SUA INSCRIÇÃO?</h2>
-		<a style="margin-left: 890px;margin-top: 20px;" href="/process/cancelar-inscricao-process.php" class="btn btn-danger">CANCELAR</a>
+		<a style="margin-left: 620px;margin-top: 20px;" href="/process/cancelar-inscricao-process.php" class="btn btn-danger">CANCELAR</a>
 	<?php else: ?>
 
 	<h1>EVENTOS DISPONÍVEIS</h1>
