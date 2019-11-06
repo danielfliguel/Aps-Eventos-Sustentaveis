@@ -16,4 +16,13 @@ require_once ('head.php');
 	?>
 </div>
 
-<h1>BEM VINDO <?php echo $_SESSION['usuario']; ?></h1>
+<h1 style="margin-top: 100px;">BEM VINDO <?php echo $_SESSION['usuario']; ?></h1>
+<div class="container" style="margin-top: 50px;">
+	<div class="row">
+		<div class="col-2"></div>
+		<div class="col-8" style="height: 500px;">
+			<img src="img/earth-1389715_1920.png" alt="">
+		</div>
+		<div class="col-2"></div>
+	</div>
+</div>

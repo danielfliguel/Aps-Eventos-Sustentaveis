@@ -14,6 +14,15 @@ $queryUsuariosResults = sqlsrv_query($conn,$queryUsuarios);
 
 ?>
 <body>
+	<?php
+	if (@$_GET['success']==true){
+		?>
+		<div class="alert-light text-danger text-center py-3">
+			<?php echo $_GET['success'];?>
+		</div>
+		<?php
+	}
+	?>
 	<h1>CONSULTAR USUÁRIOS</h1>
 	<div class="container">
 		<table class="table">

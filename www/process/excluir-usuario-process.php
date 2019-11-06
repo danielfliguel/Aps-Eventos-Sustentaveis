@@ -15,7 +15,7 @@ include 'dbconnection.php';
 	sqlsrv_free_stmt($removerUsuario);
 	sqlsrv_free_stmt($removerContatoUsuario);
 	
-	header("Location: http://localhost:81/consultar-usuarios.php"); 
+	header("Location: http://localhost:81/consultar-usuarios.php?success=USUÁRIO EXCLUÍDO COM SUCESSO"); 
 	
 
 ?>

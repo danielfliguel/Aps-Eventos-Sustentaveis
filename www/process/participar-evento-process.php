@@ -11,6 +11,6 @@
 	sqlsrv_free_stmt($participarEvento);
 	
 
-	header("Location: http://localhost:81/consultar-eventos-visitante.php?participacaoConfirmada=PARTICIPAÇÃO CONFIRMADA");
+	header("Location: http://localhost:81/consultar-eventos-visitante.php?confirmada=PARTICIPAÇÃO CONFIRMADA");
 
 ?>

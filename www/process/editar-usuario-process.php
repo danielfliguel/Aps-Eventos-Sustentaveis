@@ -7,12 +7,12 @@ include 'dbconnection.php';
 	$cpf = (int)$_POST['cpf'];
 	$sexo = $_POST['sexo'];
 	$dataNascimento = $_POST['data-nascimento'];
-	$dataNascimento = date('Y-m-d', $dataNascimento);
+	
 	$email = $_POST['email'];	
 	$telefone = $_POST['telefone'];
-	$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT) ;
+	$senha = $_POST['senha'];
 
-	$hashSenha = password_hash($senha, PASSWORD_DEFAULT);
+	
 
 	$tipoCadastro = $_POST['tipo-cadastro'];
 	$rua = $_POST['rua'];
@@ -37,7 +37,7 @@ include 'dbconnection.php';
 		
 
 	
-	header("Location: http://localhost:81/consultar-usuarios.php"); 
+	header("Location: http://localhost:81/consultar-usuarios.php?success=USUÁRIO EDITADO COM SUCESSO"); 
 	
 
 ?>

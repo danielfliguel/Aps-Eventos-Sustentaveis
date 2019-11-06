@@ -6,7 +6,7 @@ $paramCancelarParticipacao = array($_SESSION['idusuario']);
 $cancelarParticipacao = sqlsrv_query($conn,$queryCancelarParticipacao,$paramCancelarParticipacao);
 sqlsrv_free_stmt($cancelarParticipacao);
 
-header("Location: http://localhost:81/consultar-eventos-visitante.php");
+header("Location: http://localhost:81/consultar-eventos-visitante.php?success=INSCRIÇÃO CANCELADA COM SUCESSO");
 
 
 ?>
