@@ -2,7 +2,7 @@
 include 'dbconnection.php'; 	
 //LOGIN 
 //SE FOR REALIZADA UMA TENTATIVA DE LOGIN
-	echo "OLÁ";
+	
 	
 	//A variável $usuario armazena o que for inserido no campo usuário
 	$usuario = $_POST['usuario'];
@@ -15,17 +15,9 @@ include 'dbconnection.php';
 	$getLoginResults = sqlsrv_query($conn,$queryLogin,$loginParams);
 	//Trata os dados recebidos do banco
 	$rowLogin = sqlsrv_fetch_array($getLoginResults, SQLSRV_FETCH_ASSOC);
+	
+	
 
-	
-	
-	// foreach ($result as $value) {
-	// 	# code...*/
-	// }
-	//Variável que compara a senha digitada com a senha criptografada no banco
-	
-	
-	
-	//Se a comaração retornar true, inicia a sessão.
 	if ($rowLogin != null){
 		
 		//A sessão armazena o nome do usuário, o tipo de cadastro, o id do usuario e o redireciona para a página principal

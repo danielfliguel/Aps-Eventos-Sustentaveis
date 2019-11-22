@@ -6,12 +6,6 @@ include 'dbconnection.php';
 
 
 
-if ($lastId != null){
-	$id = $lastId['']+1;
-}
-else{
-	$id = 1;
-}	
 
 
 
@@ -22,7 +16,7 @@ else{
 	$sexo = $_POST['sexo'];
 	$dataNascimento = $_POST['data-nascimento'];
 	$tipoCadastro = $_POST['tipo-cadastro'];	
-	$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+	$senha = $_POST['senha'];
 	
 		
 	$email = $_POST['email'];

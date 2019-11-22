@@ -25,6 +25,19 @@ if (isset($_SESSION['usuario'])){
 			</div>
 		</div>
 		<div class="row">
+			<div class="col-12">
+				<?php
+				if (@$_GET['success']==true){
+				?>
+				<div class="alert-light text-danger text-center py-3">
+					<?php echo $_GET['success'];?>
+				</div>
+				<?php
+				}
+				?>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-4"></div>
 			<div class="col-4">
 				<img src="img/earth-1389715_1920.png" alt="">
